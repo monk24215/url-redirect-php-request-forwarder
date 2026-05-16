@@ -2,7 +2,7 @@
 
 A small, framework-agnostic PHP library for forwarding HTTP requests with faithful passthrough, automatic retry, and pluggable logging.
 
-[![Tests](https://github.com/YOUR_USERNAME/php-request-forwarder/actions/workflows/tests.yml/badge.svg)](https://github.com/YOUR_USERNAME/php-request-forwarder/actions/workflows/tests.yml)
+[![Tests](https://github.com/monk24215/url-redirect-php-request-forwarder/actions/workflows/tests.yml/badge.svg)](https://github.com/monk24215/url-redirect-php-request-forwarder/actions/workflows/tests.yml)
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D8.0-blue)](https://php.net)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -25,7 +25,7 @@ A small, framework-agnostic PHP library for forwarding HTTP requests with faithf
 ## Installation
 
 ```bash
-composer require yourvendor/php-request-forwarder
+composer require yourvendor/url-redirect-php-request-forwarder
 ```
 
 Requires PHP 8.0+, ext-curl, ext-json.
