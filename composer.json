@@ -1,0 +1,28 @@
+{
+    "name": "yourvendor/php-request-forwarder",
+    "description": "Framework-agnostic PHP HTTP request forwarder with retry, full passthrough, and pluggable logging.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["http", "proxy", "forwarder", "webhook", "curl", "retry"],
+    "require": {
+        "php": ">=8.0",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5 || ^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RequestForwarder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RequestForwarder\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
