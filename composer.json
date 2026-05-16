@@ -1,9 +1,15 @@
 {
-    "name": "yourvendor/php-request-forwarder",
+    "name": "monk24215/url-redirect-php-request-forwarder",
     "description": "Framework-agnostic PHP HTTP request forwarder with retry, full passthrough, and pluggable logging.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["http", "proxy", "forwarder", "webhook", "curl", "retry"],
+    "keywords": ["http", "proxy", "forwarder", "webhook", "curl", "retry", "url-redirect"],
+    "authors": [
+        {
+            "name": "Kristian M. Oubre",
+            "email": "koubre@gmail.com"
+        }
+    ],
     "require": {
         "php": ">=8.0",
         "ext-curl": "*",
@@ -24,5 +30,7 @@
     },
     "scripts": {
         "test": "phpunit"
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

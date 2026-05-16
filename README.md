@@ -2,12 +2,13 @@
 
 A small, framework-agnostic PHP library for forwarding HTTP requests with faithful passthrough, automatic retry, and pluggable logging.
 
-[![Tests](https://github.com/monk24215/url-redirect-php-request-forwarder/actions/workflows/tests.yml/badge.svg)](https://github.com/monk24215/url-redirect-php-request-forwarder/actions/workflows/tests.yml)
+[![Tests](https://github.com/YOUR_USERNAME/php-request-forwarder/actions/workflows/tests.yml/badge.svg)](https://github.com/YOUR_USERNAME/php-request-forwarder/actions/workflows/tests.yml)
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D8.0-blue)](https://php.net)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## What it does
 
+- Forwards method, query string, body, headers, and cookies verbatim to any target URL
 - Retries on transient failures (5xx, network errors) with exponential backoff
 - Does **not** retry 4xx — those are client-side conditions that won't change
 - Strips hop-by-hop headers (`Host`, `Content-Length`, `Connection`, etc.) automatically
@@ -24,7 +25,7 @@ A small, framework-agnostic PHP library for forwarding HTTP requests with faithf
 ## Installation
 
 ```bash
-composer require monk242/url-redirect-php-request-forwarder
+composer require yourvendor/php-request-forwarder
 ```
 
 Requires PHP 8.0+, ext-curl, ext-json.
@@ -120,7 +121,7 @@ All options passed via the second constructor argument:
 | `verify_ssl` | `true` | Verify peer + host (**leave on in production**) |
 | `strip_headers` | hop-by-hop list | Headers to strip before forwarding |
 | `source_label` | `null` | Tag for log entries |
-| `user_agent` | `'url-redirect-php-request-forwarder/1.0'` | Sent if no `User-Agent` header provided |
+| `user_agent` | `'php-request-forwarder/1.0'` | Sent if no `User-Agent` header provided |
 | `auto_detect_incoming` | `false` | Populate from `$_SERVER`/`$_GET`/`php://input` |
 
 ## ForwardResult
