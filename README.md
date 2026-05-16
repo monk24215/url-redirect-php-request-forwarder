@@ -1,8 +1,9 @@
-# PHP Request Forwarder
+# url-redirect-php-request-forwarder
 
 A small, framework-agnostic PHP library for forwarding HTTP requests with faithful passthrough, automatic retry, and pluggable logging.
 
 [![Tests](https://github.com/monk24215/url-redirect-php-request-forwarder/actions/workflows/tests.yml/badge.svg)](https://github.com/monk24215/url-redirect-php-request-forwarder/actions/workflows/tests.yml)
+[![Packagist Version](https://img.shields.io/packagist/v/monk24215/url-redirect-php-request-forwarder.svg)](https://packagist.org/packages/monk24215/url-redirect-php-request-forwarder)
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D8.0-blue)](https://php.net)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -25,7 +26,7 @@ A small, framework-agnostic PHP library for forwarding HTTP requests with faithf
 ## Installation
 
 ```bash
-composer require yourvendor/url-redirect-php-request-forwarder
+composer require monk24215/url-redirect-php-request-forwarder
 ```
 
 Requires PHP 8.0+, ext-curl, ext-json.
@@ -54,7 +55,12 @@ if ($resp->ok) {
 
 ### Transparent proxy (relay incoming request to upstream)
 
+Drop this as `index.php` in any document root and every request to that domain will be proxied to the target, with the URL bar unchanged:
+
 ```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
 use RequestForwarder\RequestForwarder;
 
 RequestForwarder::fromIncomingRequest('https://upstream.example.com/endpoint')
@@ -63,13 +69,22 @@ RequestForwarder::fromIncomingRequest('https://upstream.example.com/endpoint')
 
 This auto-detects the incoming request's method, query, body, headers, and cookies, forwards them, and echoes the upstream response back to the caller.
 
+Pair with this `.htaccess` to route every path through `index.php`:
+
+```apache
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php [QSA,L]
+```
+
 ### With file logging
 
 ```php
 use RequestForwarder\RequestForwarder;
 use RequestForwarder\Logger\FileLogger;
 
-$logger = new FileLogger('/var/log/forwards.jsonl');
+$logger = new FileLogger(__DIR__ . '/logs/forwards.jsonl');
 $rf = new RequestForwarder('https://api.example.com', [], $logger);
 $rf->forward();
 ```
@@ -121,7 +136,7 @@ All options passed via the second constructor argument:
 | `verify_ssl` | `true` | Verify peer + host (**leave on in production**) |
 | `strip_headers` | hop-by-hop list | Headers to strip before forwarding |
 | `source_label` | `null` | Tag for log entries |
-| `user_agent` | `'php-request-forwarder/1.0'` | Sent if no `User-Agent` header provided |
+| `user_agent` | `'url-redirect-php-request-forwarder/1.0'` | Sent if no `User-Agent` header provided |
 | `auto_detect_incoming` | `false` | Populate from `$_SERVER`/`$_GET`/`php://input` |
 
 ## ForwardResult
@@ -160,6 +175,10 @@ composer test
 ```
 
 Tests hit `httpbin.org` and require outbound HTTP. To run offline, you'll need to mock cURL or use a local HTTP server.
+
+## Sibling project
+
+Need this for Node.js? See [url-redirect-request-forwarder-node](https://github.com/monk24215/url-redirect-request-forwarder-node) — same surface, idiomatic Node, zero dependencies.
 
 ## Contributing
 
